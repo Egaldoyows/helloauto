@@ -1,0 +1,76 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{% block content %}
+<style>
+  .formg{
+    margin-top: 2rem;
+  }
+
+.warn{
+  color: red;
+  font-style: italic;
+}
+</style>
+  
+
+  
+
+<div class="row formg">
+  <div class="col"><h2>Payment Voucher</h2></div>
+  <div class="col">
+       
+
+    <div class="shadow-lg p-4 mb-4 bg-white ">
+      
+      {% if mess %}
+      <p class="warn">{{mess}}</p>
+        
+      {% endif %}
+        
+    <form class="form-control" method="POST">
+      {%csrf_token%}
+      <div >
+        <div class="col">
+          <h1>Create Account</h1>
+          <label for="notehead" class="form-label">Subject:
+          <input type="text" class="form-control" placeholder="Notice Subject" name="sub" style='text-transform:uppercase' required>
+        </label>
+        <label for="notebody">Note:
+<textarea class="form-control" rows="5" id="comment" name="body" required></textarea>
+</label><br>
+
+
+<select class="form-select" name="aud" required>
+  <option>Everyone</option>
+  
+  {% if list %}
+  
+  {% for name in list %}
+    
+  <option>{{name}}</option>
+
+  {% endfor %}
+  {% endif %}
+  
+</select>
+<hr>
+
+          
+          <button type="submit" class="btn btn-primary">Post Notice</button>
+          
+          
+        </div>
+      </div>
+    </form>
+    </div>
+
+  
+
+
+  </div>
+  <div class="col"></div>
+</div>
+
+
+{% endblock content %}

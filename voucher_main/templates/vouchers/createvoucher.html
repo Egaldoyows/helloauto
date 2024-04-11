@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+  
+
+  
+
+
+  
+
+  
+
+  
+    <style>
+        .formg{
+          margin-top: 2rem;
+        }
+        #total{
+            padding-left: 15rem;
+            color: green;
+        }
+
+        .titl{
+            color: green;
+            font-weight: 700;
+        }
+      </style>
+        
+      
+        
+      
+      <div class="row formg">
+        <div class="col-sm-1"><h2></h2></div>
+        <div class="col-sm-7">
+             
+      
+          <div class="shadow-lg p-4 mb-4 bg-white">
+          <form class="form-control" method="POST" action="{% url 'create-voucher'%}">
+           {% csrf_token %}
+            
+            <div >
+              <div class="col">
+                <h4 class="titl" >Create payment Voucher</h4>
+
+                <!--Alert success-->
+                <div class="alert alert-secondary alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                {{feedback}}
+                </div>
+                
+                    <select class="form-select" name="company"> 
+                      <option>SELECT COMPANY</option>
+                      <option>APEX</option>
+                      <option>INFOBRIDGE</option>
+                      <option>MPESA</option>
+              
+                    </select>
+
+                
+                <select class="form-select" name="source"> 
+                    <option>SELECT SOURCE ACCOUNT</option>
+                    <option>Equity KES</option>
+                    <option>Equity USD</option>
+                    <option>KCB KES</option>
+            
+                  </select>
+                
+
+
+                
+                <input type="text" class="form-control" placeholder="Payment Made to?" name="recp" required>
+              
+              
+                  <input type="text" class="form-control" placeholder="Receipient Acc (Optional)" name="acc">
+
+                  <select class="form-select" name="mode"> 
+                    <option>SELECT PAYMENT MODE</option>
+                    <option>Eazzybizz</option>
+                    <option>Cheque</option>
+                    <option>Cash</option>
+                    
+                  </select>
+
+                  <select class="form-select" name="proj"> 
+                    <option>SELECT PROJECT</option>
+                    <option>ROAD A</option>
+                    <option>ROAD B</option>
+                    <option>COAL</option>
+                    
+                  </select>
+                  
+                  <hr>
+
+                  <label for="desc1"> Description:
+                  <input type="text" class="form-control" placeholder="Enter Description 1" name="desc1"required>
+                </label>
+                
+                    <label for="amnt1"> Amount:
+                  <input type="number" class="form-control" placeholder="Enter Amount 1" name="amnt1" required>
+                </label><br>
+                <label for="desc2">
+                    <input type="text" class="form-control" placeholder="Description 2" name="desc2">
+                  </label>
+                
+                      <label for="amnt2">
+                    <input type="number" class="form-control" placeholder="Enter Amount 2" name="amnt2" >
+                  </label><br>
+                  <label for="desc3">
+                    <input type="text" class="form-control" placeholder="Description 3" name="desc3">
+                  </label>
+                
+                      <label for="amnt3">
+                    <input type="number" class="form-control" placeholder="Enter Amount 3" name="amnt3" >
+                  </label>
+                  <!-- <p id="total">Total: 30,000</p> -->
+                  
+                  
+                  <hr>
+                  <label for="inv"> Invoice No. :
+                    <input type="text" class="form-control" placeholder="Invoice No. (Optional)" name="inv">
+                  </label>
+                
+                      <label for="date"> Payment Date:
+                    <input type="date" class="form-control"  name="date" required>
+                  </label>
+                  <br>
+                
+                  <hr>
+
+                  <label for="comment"> <strong> Comment / Note: (Optional)</strong></label>
+                  <textarea class="form-control" rows="4" id="comment" name="comment"placeholder="Any special Note Regarding this PV? (Optional)" ></textarea>
+                
+                  {% if people %}
+                  
+                  
+                    
+                  
+                    
+                <hr>
+                <select class="form-select" name="prepared"> 
+                  <option>PREAPRED BY</option>
+                  {% for data in people %}
+                  <option>{{data.username}}</option>
+                  
+                  {% endfor %}
+                  </select>
+
+                  <hr>
+                  
+                  
+                </select>
+                <select class="form-select" name="approved"> 
+                  <option>APPROVAL BY</option>
+                  {% for data in people %}
+                  <option>{{data.username}}</option>
+                  {% endfor %}
+                  
+                </select>
+
+                
+              <hr>
+                
+                <button type="submit" class="btn btn-primary" >Create PV</button>
+               
+                
+              </div>
+            </div>
+          </form>
+          </div>
+      
+        
+      
+      
+        </div>
+        <div class="col-sm-1"></div>
+      </div>
+      
+
+    
+
+
+      {% endif %}
+
+    
+    <script>
+      
+        
+    </script>
+    {% endblock content %}
+   

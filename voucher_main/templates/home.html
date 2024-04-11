@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static%}
+
+    
+    {% block content %}
+
+
+    <div class="container">
+    <!--Nav bar-->
+
+    
+
+      <!--Notice board-->
+      
+      
+      <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="mt-4 p-5 bg-secondary text-white rounded">
+                <h2>NOTICE BOAD</h2>
+                <h5 style="font-style: italic;">Showing {{show}} Messages <a class="btn btn-success" href="#">{{act}}</a></h5>
+
+                
+                {% if note_list %}
+
+                
+                {% for note in note_list %}
+                  
+                
+                  
+                <p><div class="alert alert-success">
+                  <a href="{% url 'my_note'%}?data={{note.id}}"><strong>{{note.subject|title}}</strong></a>
+                 <p>Posted By: {{note.audience|title}} ,  On Date: {{note.date}}</p>
+                 <p></p>
+
+                
+                </div></p>
+                 {% endfor %}
+
+                 {% else %}
+                 <p><div class="alert alert-danger">
+                  Ooops! You have no notices to show
+                  </div></p>
+                  
+                {% endif %}
+                  
+
+                
+
+                
+
+                    
+                        <a class="btn btn-info btn-lg" href="{% url 'new-note'%}">Post a Notice</a>
+
+                        
+
+
+                        
+
+                        
+
+
+              </div>
+              
+        </div>
+        <div class="col-sm-2"></div>
+      </div>
+
+
+
+    
+
+    
+
+
+    
+
+</div>
+
+{% endblock content %}

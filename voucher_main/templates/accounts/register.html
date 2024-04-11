@@ -1,0 +1,59 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{% block content %}
+<style>
+  .formg{
+    margin-top: 2rem;
+  }
+</style>
+  
+
+  
+
+<div class="row formg">
+  <div class="col"><h2>Payment Voucher</h2></div>
+  <div class="col">
+       
+
+    <div class="shadow-lg p-4 mb-4 bg-white ">
+    <form class="form-control" method="POST">
+      {% csrf_token %}
+      <div >
+        <div class="col">
+          <h1>Create Account</h1>
+          <label for="uname" class="form-label">First Name
+          <input type="text" class="form-control" placeholder="Enter Your First Name" name="fname" required>
+        </label>
+        <label for="uname" class="form-label">Last Name
+            <input type="text" class="form-control" placeholder="Enter your Last Name" name="lname" required>
+          </label>
+          <label for="uname" class="form-label">Email
+            <input type="text" class="form-control" placeholder="Enter Your Email" name="email"required>
+          </label><label for="uname" class="form-label">Username
+            <input type="text" class="form-control" placeholder="Create Username" name="uname" required>
+          </label>
+          <label for="pass" class="form-label">Password
+          <input type="password" class="form-control" placeholder="Password" name="pass" required>
+        </label>
+        <label for="pass" class="form-label">Confirm Password
+          <input type="password" class="form-control" placeholder="Re-enter Password" name="cpass" required>
+        </label><br>
+          
+          <button type="submit" class="btn btn-primary" >Create Account</button>
+          <hr>
+          <h6 style="color: green;">Already a Member? <a style="font-style: italic;" href="{%url 'login-page'%}">Login</a></h6>
+        </div>
+      </div>
+    </form>
+    </div>
+
+  
+
+
+  </div>
+  <div class="col"></div>
+</div>
+
+
+{% endblock content %}

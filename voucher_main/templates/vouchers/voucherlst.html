@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+<style>
+    .list{
+        padding-top: 3rem;
+    }
+</style>
+
+
+
+
+{% block content %}
+
+
+
+<div class="row">
+    <hr>
+    <div class="col"></div>
+    <div class="col">
+
+<form action="{% url 'home-page'%}" method="post">
+{% csrf_token %}
+<label for="date"> <strong> Vouchers From Date:</strong>
+    <input type="date" class="form-control" id="date1"  name="startdate" required>
+  </label>
+
+  <label for="date"> <strong> Vouchers To Date:</strong>
+    <input type="date" class="form-control"  name="enddate" id="date2" required>
+  </label>
+  <button class="btn btn-primary " id="btns" type="submit">Search Pvs</button>
+</form>
+</div>
+<div class="col"></div>
+</div>
+  <hr>
+    
+  
+<div class="row list">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+
+    
+
+      
+
+        {% if vlist %}
+        
+        {% if start and end %}
+            
+        
+          
+        <p align="center">showing result from <strong>{{start}}</strong> to <strong> {{end}}</strong></p>
+        
+        {% else %}
+        <p align="center">Showing the most recent <strong>5</strong> Records</p>
+        {% endif %}
+        <table class="table table-striped table-bordered">
+          <th>Voucher No.</th>
+        <th>Date</th>
+        <th>Paid To</th>
+        <th>Amount</th>
+        <th>Action</th>
+
+        {% for data in vlist %}
+    
+        
+        <tr>
+            <td>{{data.id}}</td>
+             <td>{{data.payment_date}}</td>
+            <td><a href="{% url 'voucher'%}?id={{data.id}}">{{data.receipient}}</a></td>
+            <td>{{data.total|intcomma}}</td>
+            <td>
+              <div class="input-group mt-3 mb-3">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                  Modify Voucher
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a style="color: green;" class="dropdown-item" href="#">Edit Voucher</a></li>
+                  <li><a style="color: red;" class="dropdown-item" href="{% url 'delete'%}?id={{data.id}}">Delete Voucher</a></li>
+                </ul>
+                
+              </div>
+            </td>
+            
+        </tr>
+        
+        {% endfor %}
+        
+        {% else %}
+        <p><a href="{% url 'home-page'%}">{{feedback}} </a> </p>
+        {% endif %}
+
+
+        
+
+    
+    </table>
+    <ul class="pagination">
+      
+      {% if pvouchers.has_previous %}
+        
+      
+      <li class="page-item"><a class="page-link" href="?page=1">Previous</a>&laquo First</li>
+      <li class="page-item"><a class="page-link" href="{{pvouchers.previous_page_number}}">Previous</a></li>
+      {% endif %}
+      
+      
+      {% if pvouchers.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{pvouchers.next_page_number}}">Next</a></li>
+      <li class="page-item"><a class="page-link" href="?page={{pvouchers.paginator.num_pages}}">Last &raquo</a></li>
+      {% endif %}
+        
+      
+    </ul>
+  </div>
+    
+    <div class="col-sm-2"></div>
+    
+  </div >
+  
+  
+  
+  
+
+
+  {% endblock content %}
+
